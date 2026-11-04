@@ -14,7 +14,7 @@ function make(tag, className, text) {
 }
 
 /* Nav turns solid once the hero has scrolled away */
-new IntersectionObserver(([e]) => $('nav').classList.toggle('over', e.isIntersecting), { rootMargin: '0px 0px -99% 0px' }).observe($('top'));
+new IntersectionObserver(([e]) => $('nav').classList.toggle('over', e.isIntersecting), { rootMargin: '-80px 0px -50% 0px' }).observe($('top'));
 $('menu').addEventListener('click', e => { if (e.target.closest('a') && $('menu').matches(':popover-open')) $('menu').hidePopover(); });
 
 /* Chosen dates are shared by the booking bar, the lead form and the chat */

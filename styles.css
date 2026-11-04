@@ -15,6 +15,7 @@
   --display: 'Jost', system-ui, sans-serif;
   --body: 'Figtree', system-ui, sans-serif;
   --nav-h: 68px;
+  --banner-h: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,8 +65,12 @@ a { color: inherit; }
   .btn-ghost:not(:disabled):hover { border-color: var(--accent); }
 }
 
+/* Sits on the hero photo above the nav and scrolls away with it */
+.demo-banner { position: absolute; inset: 0 0 auto; z-index: 11; height: var(--banner-h); padding: 6px 16px 0; color: #fff; font-size: .8125rem; line-height: 18px; text-align: center; text-shadow: 0 1px 6px rgb(24 13 5 / .6); }
+.demo-banner a { display: inline-block; margin-left: 2px; padding: 0 8px; border-radius: 999px; background: #8a4414; color: #fff8ee; font-weight: 600; text-decoration: none; text-shadow: none; }
+
 /* The nav sits over the hero, clear of the page flow, then turns solid */
-.nav { position: sticky; top: 0; z-index: 10; margin-bottom: calc(var(--nav-h) * -1); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+.nav { position: sticky; top: 0; z-index: 10; margin-top: var(--banner-h); margin-bottom: calc((var(--nav-h) + var(--banner-h) + 1px) * -1); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
 .nav.over { background: transparent; backdrop-filter: none; border-color: transparent; color: #fff; }
 .nav.over .brand i { color: inherit; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--nav-h); }
@@ -82,10 +87,10 @@ a { color: inherit; }
 .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; animation: hero-zoom 24s ease-out both; }
 @keyframes hero-zoom { from { transform: scale(1.08); } }
 .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgb(24 13 5 / .92) 0%, rgb(24 13 5 / .74) 34%, rgb(24 13 5 / .42) 56%, rgb(24 13 5 / .05) 76%, rgb(24 13 5 / .55) 100%); }
-.hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-top: calc(var(--nav-h) + 72px); padding-bottom: clamp(32px, 5vh, 56px); }
+.hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-top: calc(var(--banner-h) + var(--nav-h) + 72px); padding-bottom: clamp(32px, 5vh, 56px); }
 .hero h1 { max-width: 14ch; }
 .lede { font-size: 1.1875rem; margin-top: 16px; max-width: 46ch; }
-.hero-photos { position: absolute; top: calc(var(--nav-h) + 16px); right: clamp(16px, 4vw, 48px); display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 1px solid rgb(255 255 255 / .5); border-radius: 999px; background: rgb(24 13 5 / .45); backdrop-filter: blur(8px); color: #fff; font: 600 .9375rem var(--body); cursor: pointer; }
+.hero-photos { position: absolute; top: calc(var(--banner-h) + var(--nav-h) + 16px); right: clamp(16px, 4vw, 48px); display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 1px solid rgb(255 255 255 / .5); border-radius: 999px; background: rgb(24 13 5 / .45); backdrop-filter: blur(8px); color: #fff; font: 600 .9375rem var(--body); cursor: pointer; }
 .booking { display: grid; grid-template-columns: minmax(0, 1fr) 104px auto; gap: 10px; width: min(880px, 100%); margin-top: 24px; padding: 12px; background: var(--surface); color: var(--ink); border-radius: 16px; box-shadow: var(--shadow); }
 .booking .btn { min-height: 60px; }
 
