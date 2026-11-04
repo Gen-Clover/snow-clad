@@ -1,0 +1,22 @@
+{
+  "rating": 5.0,
+  "count": null,
+  "url": "https://www.google.com/maps/place/Snow+Clad+Group/@30.6435075,76.7927285,17z/data=!3m1!4b1!4m6!3m5!1s0x390feb638ee92935:0x9be07a3a0a0db3cc!8m2!3d30.6435075!4d76.7927285!16s%2Fg%2F11p1_7lwth",
+  "airbnb": {
+    "rating": 5.0,
+    "count": 3,
+    "scores": [
+      { "label": "Cleanliness", "score": 5.0 },
+      { "label": "Accuracy", "score": 5.0 },
+      { "label": "Check-in", "score": 5.0 },
+      { "label": "Communication", "score": 5.0 },
+      { "label": "Location", "score": 4.7 },
+      { "label": "Value", "score": 5.0 }
+    ]
+  },
+  "reviews": [
+    { "author": "Sourabh", "source": "Airbnb", "text": "Had a wonderful stay! The place was super comfortable, and the balcony view was beautiful. Special thanks to Lily Ma’am for being so polite, kind, and helpful throughout my stay. Her hospitality made the experience even better. Highly recommended!❤️😇" },
+    { "author": "Dr. Ritin", "source": "Airbnb", "text": "One of the best stays you can find near chandigarh, smooth check in" },
+    { "author": "Rakesh", "source": "Airbnb", "text": "The place is as it is shown in photos, i had a great time worth booking" }
+  ]
+}

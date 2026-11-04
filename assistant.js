@@ -1,6 +1,6 @@
 // Scripted demo assistant: no LLM, no network, nothing stored.
-// Every value in STAY is a placeholder until the owner confirms it.
-export const STAY = { nightly: 3200, weekend: 3900, maxGuests: 4, checkIn: '2 PM', checkOut: '11 AM' };
+// STAY comes from the public Airbnb listing, Nov 2026.
+export const STAY = { maxGuests: 2, checkIn: '12 PM', checkOut: '11 AM' };
 
 const DAY = 864e5;
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -9,11 +9,10 @@ const MON = 'jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|june?|july?|au
 const ORD = '(?:st|nd|rd|th)?';
 const TO = '(?:-|to|till|until)';
 
-const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
-const nightsBetween = (a, b) => Math.round((b - a) / DAY);
+export const midnight = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+export const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+export const nightsBetween = (a, b) => Math.round((b - a) / DAY);
 const monthIndex = m => MONTHS.indexOf(m.slice(0, 3));
-const money = n => '₹' + n.toLocaleString('en-IN');
 
 export const formatDate = d => d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
 const chipDate = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
@@ -26,12 +25,6 @@ export const isBooked = d => [3, 4, 5].includes(Math.floor(Date.UTC(d.getFullYea
 export function isOpen(checkIn, checkOut) {
   for (let d = checkIn; d < checkOut; d = addDays(d, 1)) if (isBooked(d)) return false;
   return true;
-}
-
-export function quote(checkIn, checkOut) {
-  let total = 0;
-  for (let d = checkIn; d < checkOut; d = addDays(d, 1)) total += [5, 6].includes(d.getDay()) ? STAY.weekend : STAY.nightly;
-  return total;
 }
 
 function nextOpening(checkIn, nights) {
@@ -141,18 +134,19 @@ export function parseGuests(text, bareAllowed = false) {
 }
 
 const FAQ = [
-  [/\b(price|prices|pricing|rate|rates|cost|costs|tariff|how much|charges?)\b/, () => `Sample rates for this demo: ${money(STAY.nightly)} a night, ${money(STAY.weekend)} on Fridays and Saturdays. Give me your dates and I can total it up.`],
+  [/\b(price|prices|pricing|rate|rates|cost|costs|tariff|how much|charges?)\b/, () => 'The host confirms the price for your dates. You can also see it on the Airbnb listing once you add your dates.'],
   [/self.?check|door code|smart lock|\bkeys?\b|front desk|(what|when|how).*check.?(in|out)|check.?(in|out) (time|timing)/, () => `Check-in is any time after ${STAY.checkIn} and check-out is by ${STAY.checkOut}. You get a door code once your stay is confirmed, so there is no key handover and no waiting at a desk.`],
   [/\b(wi-?fi|internet)\b/, () => 'Yes, Wi-Fi is included, and there is a proper desk with an ergonomic chair if you need to work.'],
-  [/\bparking\b/, () => 'Yes, parking is available at the property.'],
+  [/\bparking\b/, () => 'Yes, there is free parking on the premises.'],
   [/\b(pets?|dogs?|cats?)\b/, () => 'Please ask the host about pets before you book. I can pass the question along with your enquiry.'],
   [/\b(address|location|where|directions?|airport|map)\b/, () => 'You will find it at SBP City of Dreams, opposite Trishla City, on High Ground Road in Zirakpur, close to Chandigarh and Mohali.'],
-  [/\b(kitchen|cook|cooking)\b/, () => 'There is a kitchenette with a sink and cabinets, plus a kettle, tea tray and mini fridge. The host can tell you what cooking equipment is provided.'],
-  [/\b(balcony|view|garden|courtyard)\b/, () => 'The suite has a private balcony over the courtyard, with gardens, a gazebo, a sports court and a giant chess board below.'],
-  [/\b(bathrobe|towels?|toiletries|hair ?dryer|shower|geyser|hot water)\b/, () => 'The bathroom has a rain shower and water heater, with towels, a bathrobe, toiletries and a hair dryer provided.'],
-  [/\b(cancel|cancellation|refund)\b/, () => 'The host confirms the cancellation terms with your booking. In this demo the terms are still to be added.'],
+  [/\b(kitchen|cook|cooking)\b/, () => 'There is no full kitchen. The room has a pantry corner with a sink and cabinets, plus a kettle, tea tray and mini fridge.'],
+  [/\b(balcony|view|garden|courtyard)\b/, () => 'The room has a private balcony over the courtyard, with gardens, a gazebo, a sports court and a giant chess board below.'],
+  [/\b(bathrobe|towels?|toiletries|hair ?dryer|shower|geyser|hot water)\b/, () => 'The private attached bathroom has a rain shower and hot water, with towels, soap, shampoo, a bathrobe and a hair dryer provided.'],
+  [/\b(washing|laundry|heating|room heater|tumble)\b/, () => 'The room has air conditioning and ceiling fans, but no heating, washing machine or tumble dryer.'],
+  [/\b(cancel|cancellation|refund)\b/, () => 'On Airbnb, the dates I checked had free cancellation until about a day before check-in. The exact date for your stay is shown when you book.'],
   [/\b(iron|ironing)\b/, () => 'Yes. There is a pull-out ironing board with an iron built into the wardrobe, so your work clothes are easy to sort.'],
-  [/\b(human|person|agent|owner|host|call me|phone number|talk to)\b/, () => 'Happy to get a person involved. Call the host on xxxxx xxxxx, or leave your details here and they will reach out.'],
+  [/\b(human|person|agent|owner|host|call me|phone number|talk to)\b/, () => 'Happy to get a person involved. Your host is Jassi, an Airbnb Superhost who replies within an hour. Call on xxxxx xxxxx, or leave your details here and they will reach out.'],
 ];
 
 const faqAnswer = t => FAQ.find(([re]) => re.test(t))?.[1]() ?? null;
@@ -162,7 +156,8 @@ export const newState = () => ({ step: 'dates', checkIn: null, checkOut: null, g
 export const greeting = () => ({
   state: newState(),
   say: ["Hi, I'm Snow, the Snow Clad stay assistant. Which dates are you looking at?"],
-  chips: ['This weekend', 'Next weekend', 'Tomorrow for 2 nights', 'What are the rates?'],
+  chips: ['This weekend', 'Next weekend', 'Tomorrow for 2 nights'],
+  calendar: true,
 });
 
 const stayLine = s => `${formatDate(s.checkIn)} to ${formatDate(s.checkOut)} (${nightsBetween(s.checkIn, s.checkOut)} night${nightsBetween(s.checkIn, s.checkOut) > 1 ? 's' : ''})`;
@@ -170,8 +165,8 @@ const stayLine = s => `${formatDate(s.checkIn)} to ${formatDate(s.checkOut)} (${
 function advance(s, say) {
   if (!s.checkIn) {
     s.step = 'dates';
-    say.push('Which dates are you looking at? Something like "15 to 18 Nov" or "this weekend" works.');
-    return { say, state: s, chips: ['This weekend', 'Next weekend', 'Tomorrow for 2 nights'] };
+    say.push('Which dates are you looking at? Pick them below, or type something like "15 to 18 Nov".');
+    return { say, state: s, chips: ['This weekend', 'Next weekend', 'Tomorrow for 2 nights'], calendar: true };
   }
   if (!s.checkOut) {
     s.step = 'dates';
@@ -185,14 +180,14 @@ function advance(s, say) {
   }
   if (isOpen(s.checkIn, s.checkOut)) {
     s.step = 'offer';
-    say.push(`Good news: ${stayLine(s)} is open for ${s.guests} guest${s.guests > 1 ? 's' : ''}. Estimated total ${money(quote(s.checkIn, s.checkOut))} at sample rates.`, 'Shall I send this to the host to hold for you?');
+    say.push(`Good news: ${stayLine(s)} is open. Shall I send this to the host to hold for you?`);
     return { say, state: s, chips: ['Yes, hold these dates', 'Try other dates'] };
   }
   const nights = nightsBetween(s.checkIn, s.checkOut);
   const alt = nextOpening(s.checkIn, nights);
   s.step = 'dates';
   say.push(`Some nights in ${stayLine(s)} are already booked.` + (alt ? ` The closest opening for ${nights} night${nights > 1 ? 's' : ''} starts ${formatDate(alt)}.` : ''));
-  return { say, state: s, chips: [...(alt ? [`${chipDate(alt)} to ${chipDate(addDays(alt, nights))}`] : []), 'Try other dates'] };
+  return { say, state: s, chips: [...(alt ? [`${chipDate(alt)} to ${chipDate(addDays(alt, nights))}`] : []), 'Try other dates'], calendar: true };
 }
 
 const PROMPT = {
@@ -226,7 +221,7 @@ export function reply(text, state, today = new Date()) {
     s.step = 'done';
     return {
       say: [
-        `All set, ${s.name.split(' ')[0]}. Here is the enquiry the host would receive: ${stayLine(s)}, ${s.guests} guest${s.guests > 1 ? 's' : ''}, estimated ${money(quote(s.checkIn, s.checkOut))}, call back on ${raw}.`,
+        `All set, ${s.name.split(' ')[0]}. Here is the enquiry the host would receive: ${stayLine(s)}, ${s.guests} guest${s.guests > 1 ? 's' : ''}, call back on ${raw}.`,
         'This is a demo, so nothing was actually sent. In the live version the host gets this right away.',
       ],
       state: s,

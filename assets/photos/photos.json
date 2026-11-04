@@ -84,7 +84,7 @@
     "file": "bedroom-foot-of-bed-towards-lounge.avif",
     "category": "Bedroom",
     "label": "Foot of the bed towards the lounge",
-    "alt": "View from beside the bed along the suite towards the TV wall, lounge and desk",
+    "alt": "View from beside the bed along the room towards the TV wall, lounge and desk",
     "width": 1680,
     "height": 1260,
     "source": "f93c32c0-602a-4fd7-8717-535826d9b9d0.avif"
@@ -145,16 +145,16 @@
   },
   {
     "file": "suite-wide-desk-bed-lounge.jpeg",
-    "category": "Whole suite",
-    "label": "The whole suite from the desk",
-    "alt": "Wide view of the suite from behind the desk, showing the bed, lounge, TV wall and balcony doors",
+    "category": "Whole room",
+    "label": "The whole room from the desk",
+    "alt": "Wide view of the room from behind the desk, showing the bed, lounge, TV wall and balcony doors",
     "width": 1680,
     "height": 1260,
     "source": "14ba6ba4-c919-46c0-a980-db550527c6d0.jpeg"
   },
   {
     "file": "suite-wide-bed-tv-wall.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "Bedroom and TV wall",
     "alt": "Wide view with the coffee table in front, the bed behind it and a wooden TV wall on the right",
     "width": 1680,
@@ -163,8 +163,8 @@
   },
   {
     "file": "suite-wide-from-entrance-01.avif",
-    "category": "Whole suite",
-    "label": "The suite from the entrance",
+    "category": "Whole room",
+    "label": "The room from the entrance",
     "alt": "View from the entrance across the lounge towards the bed and balcony doors",
     "width": 1680,
     "height": 1260,
@@ -172,7 +172,7 @@
   },
   {
     "file": "suite-wide-from-entrance-02.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "Entrance view towards the balcony",
     "alt": "View from the entrance, with the granite counter in front and the balcony doors at the far end",
     "width": 1680,
@@ -181,16 +181,16 @@
   },
   {
     "file": "suite-wide-from-entrance-03.avif",
-    "category": "Whole suite",
-    "label": "Length of the suite",
-    "alt": "The full length of the suite from the sofa to the bed and balcony doors",
+    "category": "Whole room",
+    "label": "Length of the room",
+    "alt": "The full length of the room from the sofa to the bed and balcony doors",
     "width": 1680,
     "height": 1260,
     "source": "f60de002-53a1-46e9-bb70-4ea226391397.avif"
   },
   {
     "file": "suite-wide-sofa-towards-bed-01.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "From the sofa towards the bed",
     "alt": "View from the sofa past the coffee table towards the bed",
     "width": 1680,
@@ -199,7 +199,7 @@
   },
   {
     "file": "suite-wide-sofa-towards-bed-02.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "Sofa, desk and bed",
     "alt": "Sofa and armchair in front, with the desk and four-poster bed behind",
     "width": 1680,
@@ -208,16 +208,16 @@
   },
   {
     "file": "suite-tv-wall-towards-lounge.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "TV wall looking to the lounge",
-    "alt": "Wall-mounted TV on a wooden panel, looking along the suite to the lounge and entrance",
+    "alt": "Wall-mounted TV on a wooden panel, looking along the room to the lounge and entrance",
     "width": 1680,
     "height": 1260,
     "source": "3f95b6a6-9fc0-484f-ac96-00b1950010b1.avif"
   },
   {
     "file": "suite-tv-wall-mirror-hair-dryer.avif",
-    "category": "Whole suite",
+    "category": "Whole room",
     "label": "TV wall, mirror and hair dryer",
     "alt": "Wooden TV wall, full-length mirror reflecting the bed, and a wall-mounted hair dryer",
     "width": 1680,
@@ -254,8 +254,8 @@
   {
     "file": "kitchenette-sink-cabinets-window.avif",
     "category": "Work and everyday",
-    "label": "Kitchenette",
-    "alt": "Kitchenette with a steel sink, black granite counter, wooden cabinets and a window onto the balcony",
+    "label": "Pantry sink and cabinets",
+    "alt": "Pantry corner with a steel sink, black granite counter, wooden cabinets and a window onto the balcony",
     "width": 1680,
     "height": 1260,
     "source": "f8f3c216-5357-4022-ab14-2e364dd142d2.avif"
@@ -326,8 +326,8 @@
   {
     "file": "entrance-plaque-view-into-suite.avif",
     "category": "Entrance",
-    "label": "Plaque and view into the suite",
-    "alt": "Snow Clad Group door plaque, with the open door showing the suite beyond",
+    "label": "Plaque and view into the room",
+    "alt": "Snow Clad Group door plaque, with the open door showing the room beyond",
     "width": 1680,
     "height": 1260,
     "source": "786708fb-655b-49f1-9cf0-6480c2599fa7.avif"

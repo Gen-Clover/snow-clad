@@ -4,69 +4,83 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Snow Clad | Self check-in guest suite in Zirakpur, near Chandigarh</title>
-  <meta name="description" content="A private self check-in guest suite with a four-poster bed, lounge, work desk, kitchenette and balcony at SBP City of Dreams, Zirakpur, near Chandigarh.">
-  <link rel="icon" href="data:,">
+  <title>Snow Clad Elite Urban | Self check-in room in Zirakpur, near Chandigarh</title>
+  <meta name="description" content="A private self check-in room with a four-poster bed, lounge, work desk, attached bathroom, balcony and free parking at SBP City of Dreams, Zirakpur, near Chandigarh.">
+  <!-- shortcut: demo only, remove this tag when the site goes live so search engines can list it -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- shortcut: assumes the default Vercel link, update both URLs if the project gets a different one -->
+  <meta property="og:url" content="https://snow-clad.vercel.app/">
+  <meta property="og:image" content="https://snow-clad.vercel.app/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Snow Clad Elite Urban | Self check-in room in Zirakpur">
+  <meta property="og:description" content="A private room near Chandigarh with a four-poster bed, lounge, attached bathroom and balcony. Let yourself in with a door code.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <!-- shortcut: fonts and icons load from CDNs, self-host them before this goes live -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="styles.css">
   <link rel="preload" as="image" href="assets/photos/bedroom-four-poster-rug-lounge-01.avif">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="nav">
+  <header class="nav over" id="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="Snow Clad home"><i class="ph ph-snowflake" aria-hidden="true"></i>Snow Clad</a>
-      <nav aria-label="Main">
-        <a href="#stay">The suite</a>
+      <nav aria-label="Main" id="menu" popover>
+        <a href="#stay">The room</a>
         <a href="#balcony">Balcony</a>
+        <a href="#reviews">Reviews</a>
         <a href="#check-in">Self check-in</a>
         <a href="#location">Location</a>
         <a href="#questions">Questions</a>
       </nav>
-      <button class="btn btn-solid btn-small" type="button" data-open-chat>Check availability</button>
+      <div class="nav-actions">
+        <button class="btn btn-solid btn-small nav-cta" type="button" data-open-chat>Check availability</button>
+        <button class="icon-btn menu-btn" type="button" popovertarget="menu" aria-label="Open menu"><i class="ph ph-list" aria-hidden="true"></i></button>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero wrap" id="top">
-      <div class="hero-copy">
+    <section class="hero" id="top">
+      <img class="hero-img" src="assets/photos/bedroom-four-poster-rug-lounge-01.avif" alt="Four-poster bed with a brown runner and bench on a patterned rug, with the lounge behind it" width="1680" height="1260" fetchpriority="high">
+      <div class="wrap hero-inner">
+        <button class="hero-photos" type="button" data-gallery><i class="ph ph-images" aria-hidden="true"></i>37 photos</button>
         <h1>Skip the front desk. Let yourself in.</h1>
-        <p class="lede">A private guest suite in Zirakpur, near Chandigarh. Tell our assistant your dates and get an instant answer.</p>
+        <p class="lede">Snow Clad Elite Urban is a private room with an attached bathroom and free parking in Zirakpur, near Chandigarh. Pick your dates and get an instant answer.</p>
 
         <form class="booking" id="booking" novalidate aria-label="Check availability">
-          <div class="field">
-            <label for="b-in">Check-in</label>
-            <input id="b-in" type="date">
-          </div>
-          <div class="field">
-            <label for="b-out">Check-out</label>
-            <input id="b-out" type="date">
-          </div>
-          <div class="field">
+          <button class="date-trigger" type="button" data-dates aria-label="Choose your dates">
+            <span><small>Check-in</small><b data-in>Add date</b></span>
+            <span><small>Check-out</small><b data-out>Add date</b></span>
+          </button>
+          <div class="guest-box">
             <label for="b-guests">Guests</label>
             <select id="b-guests">
-              <option>1</option><option selected>2</option><option>3</option><option>4</option>
+              <option>1</option><option selected>2</option>
             </select>
           </div>
           <button class="btn btn-solid" type="submit">Check availability</button>
         </form>
-        <a class="link" href="#stay">See the suite <i class="ph ph-arrow-down" aria-hidden="true"></i></a>
       </div>
-      <figure class="hero-media">
-        <img src="assets/photos/bedroom-four-poster-rug-lounge-01.avif" alt="Four-poster bed with a brown runner and bench on a patterned rug, with the lounge behind it" width="1680" height="1260" fetchpriority="high">
-      </figure>
     </section>
 
     <section class="facts wrap" aria-label="At a glance">
-      <a class="fact" href="https://www.google.com/maps/place/Snow+Clad+Group/@30.6435075,76.7927285,17z/data=!3m1!4b1!4m6!3m5!1s0x390feb638ee92935:0x9be07a3a0a0db3cc!8m2!3d30.6435075!4d76.7927285!16s%2Fg%2F11p1_7lwth" target="_blank" rel="noopener">
-        <strong>5.0 <i class="ph ph-star" aria-hidden="true"></i></strong>
-        <span>Rated on Google. Read the reviews</span>
+      <a class="fact" data-review-link href="https://www.google.com/maps/place/Snow+Clad+Group/@30.6435075,76.7927285,17z/data=!3m1!4b1!4m6!3m5!1s0x390feb638ee92935:0x9be07a3a0a0db3cc!8m2!3d30.6435075!4d76.7927285!16s%2Fg%2F11p1_7lwth" target="_blank" rel="noopener">
+        <strong>5.0 <span class="stars" role="img" aria-label="5 out of 5 stars"><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i></span></strong>
+        <span data-review-count>Rated on Google. Read the reviews</span>
       </a>
+      <div class="fact">
+        <strong><i class="ph ph-medal" aria-hidden="true"></i> Hosted by Jassi</strong>
+        <span>Airbnb Superhost, replies within an hour</span>
+      </div>
       <div class="fact">
         <strong><i class="ph ph-lock-key" aria-hidden="true"></i> Digital door lock</strong>
         <span>No key handover, no waiting around</span>
@@ -78,57 +92,73 @@
     </section>
 
     <section class="section wrap" id="stay">
-      <h2>One big suite with room for everything</h2>
-      <p class="sub">A four-poster bed, a lounge with a full sofa set, a work desk and a kitchenette, all to yourself.</p>
+      <h2>One big room with space for everything</h2>
+      <p class="sub">A four-poster bed, a lounge with a full sofa set, a work desk, a pantry corner and a private attached bathroom.</p>
       <div class="bento reveal">
         <figure class="b-lounge"><img src="assets/photos/lounge-sofa-set-desk-wall-art.avif" alt="Lounge with a wooden sofa set, granite coffee table and framed wall art, with the work desk to one side" loading="lazy" width="1680" height="1260"><figcaption>Lounge and work desk</figcaption></figure>
-        <figure class="b-wide"><img src="assets/photos/suite-wide-from-entrance-03.avif" alt="The full length of the suite from the sofa to the bed and balcony doors" loading="lazy" width="1680" height="1260"><figcaption>The full length of the suite</figcaption></figure>
+        <figure class="b-wide"><img src="assets/photos/suite-wide-from-entrance-03.avif" alt="The full length of the room from the sofa to the bed and balcony doors" loading="lazy" width="1680" height="1260"><figcaption>The full length of the room</figcaption></figure>
         <figure class="b-bath"><img src="assets/photos/bathroom-vanity-mirror-towels.avif" alt="Wash basin with a large mirror, magnifying mirror, white towels and toiletry bottles" loading="lazy" width="1680" height="1260"><figcaption>Bathroom</figcaption></figure>
-        <figure class="b-kitchen"><img src="assets/photos/kitchenette-sink-cabinets-window.avif" alt="Kitchenette with a steel sink, black granite counter, wooden cabinets and a window onto the balcony" loading="lazy" width="1680" height="1260"><figcaption>Kitchenette</figcaption></figure>
+        <figure class="b-kitchen"><img src="assets/photos/kitchenette-sink-cabinets-window.avif" alt="Pantry corner with a steel sink, black granite counter, wooden cabinets and a window onto the balcony" loading="lazy" width="1680" height="1260"><figcaption>Pantry corner</figcaption></figure>
       </div>
-      <button class="btn btn-ghost gallery-open" type="button" id="gallery-open"><i class="ph ph-images" aria-hidden="true"></i>See all 37 photos</button>
+      <button class="btn btn-ghost gallery-open" type="button" data-gallery><i class="ph ph-images" aria-hidden="true"></i>See all 37 photos</button>
     </section>
 
     <section class="detail">
       <div class="wrap detail-grid">
         <figure class="detail-media reveal">
-          <img src="assets/photos/wardrobe-pull-out-ironing-board.avif" alt="Pull-out ironing board and iron built into the wardrobe, beside sheer curtains and the balcony" loading="lazy" width="1680" height="1260">
-          <figcaption>The ironing board slides out of the wardrobe</figcaption>
+          <img src="assets/photos/bedroom-headboard-wall-art.avif" alt="Wooden headboard with white pillows, two gold-toned art prints and a wall light on each side" loading="lazy" width="1680" height="1260">
+          <figcaption>Crisp white linen, with a reading light on each side</figcaption>
         </figure>
         <div>
           <h2>The small things are already sorted</h2>
           <p class="sub">Everything you would otherwise have to ask a front desk for is already in the room.</p>
-          <div class="amenities">
-            <div>
-              <h3>Rest and refresh</h3>
-              <ul>
-                <li><i class="ph ph-bed" aria-hidden="true"></i>Four-poster bed, white linen</li>
-                <li><i class="ph ph-t-shirt" aria-hidden="true"></i>Bathrobe, towels and toiletries</li>
-                <li><i class="ph ph-wind" aria-hidden="true"></i>Hair dryer, full-length mirror</li>
-                <li><i class="ph ph-fan" aria-hidden="true"></i>Ceiling fans and air conditioning</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Work and everyday</h3>
-              <ul>
-                <li><i class="ph ph-desk" aria-hidden="true"></i>Desk with an ergonomic chair</li>
-                <li><i class="ph ph-coffee" aria-hidden="true"></i>Kettle, tea tray and mini fridge</li>
-                <li><i class="ph ph-cooking-pot" aria-hidden="true"></i>Kitchenette with sink and cabinets</li>
-                <li><i class="ph ph-television" aria-hidden="true"></i>Wall-mounted TV</li>
-              </ul>
-            </div>
-          </div>
+          <ul class="tiles" id="tiles">
+            <li><i class="ph ph-bed" aria-hidden="true"></i>Four-poster bed</li>
+            <li><i class="ph ph-fan" aria-hidden="true"></i>AC and ceiling fans</li>
+            <li><i class="ph ph-desk" aria-hidden="true"></i>Desk, ergonomic chair</li>
+            <li><i class="ph ph-wifi-high" aria-hidden="true"></i>Wi-Fi</li>
+            <li><i class="ph ph-car" aria-hidden="true"></i>Free parking</li>
+            <li><i class="ph ph-television" aria-hidden="true"></i>Wall-mounted TV</li>
+            <li hidden><i class="ph ph-coffee" aria-hidden="true"></i>Kettle, tea, mini fridge</li>
+            <li hidden><i class="ph ph-drop" aria-hidden="true"></i>Pantry sink, cabinets</li>
+            <li hidden><i class="ph ph-t-shirt" aria-hidden="true"></i>Bathrobe</li>
+            <li hidden><i class="ph ph-hand-soap" aria-hidden="true"></i>Towels, soap, shampoo</li>
+            <li hidden><i class="ph ph-shower" aria-hidden="true"></i>Rain shower, hot water</li>
+            <li hidden><i class="ph ph-wind" aria-hidden="true"></i>Hair dryer</li>
+            <li hidden><i class="ph ph-person" aria-hidden="true"></i>Full-length mirror</li>
+            <li hidden><i class="ph ph-coat-hanger" aria-hidden="true"></i>Hangers, ironing board</li>
+            <li hidden><i class="ph ph-tree" aria-hidden="true"></i>Private balcony</li>
+            <li hidden><i class="ph ph-lock-key" aria-hidden="true"></i>Digital door lock</li>
+          </ul>
+          <button class="btn btn-ghost btn-small tiles-more" type="button" id="tiles-more" aria-expanded="false" aria-controls="tiles">Show all 16 amenities</button>
         </div>
       </div>
     </section>
 
-    <section class="section wrap balcony" id="balcony">
-      <h2>A balcony over the courtyard</h2>
-      <p class="sub">Look out over the gardens, gazebo, sports court and giant chess board, then watch the buildings light up at night.</p>
-      <div class="balcony-grid reveal">
-        <figure><img src="assets/photos/balcony-courtyard-view-day.avif" alt="Balcony railing looking over a landscaped courtyard with a gazebo, blue sports court and giant chess board, under a clear blue sky" loading="lazy" width="1680" height="1260"><figcaption>By day</figcaption></figure>
-        <figure><img src="assets/photos/balcony-courtyard-view-night.avif" alt="The same balcony at night, with the courtyard and surrounding buildings lit up in warm light" loading="lazy" width="1200" height="900"><figcaption>After dark</figcaption></figure>
+    <section class="band" id="balcony">
+      <div class="band-bg"><img src="assets/photos/balcony-courtyard-view-night.avif" alt="The balcony at night, with the courtyard and surrounding buildings lit up in warm light" loading="lazy" width="1200" height="900"></div>
+      <div class="wrap band-inner">
+        <div class="band-copy">
+          <h2>A balcony over the courtyard</h2>
+          <p class="sub">Look out over the gardens, gazebo, sports court and giant chess board, then watch the buildings light up at night.</p>
+        </div>
+        <figure class="band-day">
+          <img src="assets/photos/balcony-courtyard-view-day.avif" alt="Balcony railing looking over a landscaped courtyard with a gazebo, blue sports court and giant chess board, under a clear blue sky" loading="lazy" width="1680" height="1260">
+          <figcaption>The same view by day</figcaption>
+        </figure>
       </div>
+    </section>
+
+    <section class="section wrap" id="reviews">
+      <div class="reviews-head">
+        <div>
+          <h2>What guests say</h2>
+          <p class="reviews-score"><b>5.0</b> <span class="stars" role="img" aria-label="5 out of 5 stars"><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i><i class="ph-fill ph-star" aria-hidden="true"></i></span> <span data-review-total>on Airbnb</span></p>
+        </div>
+        <a class="btn btn-ghost" href="https://www.airbnb.co.in/rooms/1792674513928778015" target="_blank" rel="noopener">See the Airbnb listing <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+      </div>
+      <dl class="review-scores" id="review-scores"></dl>
+      <div class="review-list" id="review-list"></div>
     </section>
 
     <section class="section wrap checkin" id="check-in">
@@ -137,14 +167,20 @@
         <ol class="steps">
           <li><i class="ph ph-calendar-check" aria-hidden="true"></i><div><h3>Confirm your dates</h3><p>Tell Snow when you are coming. The host confirms your booking.</p></div></li>
           <li><i class="ph ph-chat-circle-text" aria-hidden="true"></i><div><h3>Get your door code</h3><p>Your code and directions reach your phone before you travel.</p></div></li>
-          <li><i class="ph ph-door-open" aria-hidden="true"></i><div><h3>Let yourself in</h3><p>Arrive after 2 PM, late flight or not. Nobody is waiting on you.</p></div></li>
+          <li><i class="ph ph-door-open" aria-hidden="true"></i><div><h3>Let yourself in</h3><p>Arrive after 12 PM, late flight or not. Nobody is waiting on you.</p></div></li>
         </ol>
       </div>
       <div class="lock" id="lock">
-        <div class="lock-screen" id="lock-screen" role="status">Enter your code</div>
-        <div class="lock-keys" aria-hidden="true">
-          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span class="off"></span><span>0</span><span class="off"></span>
+        <div class="door" aria-hidden="true">
+          <img src="assets/photos/suite-wide-from-entrance-01.avif" alt="" loading="lazy" width="1680" height="1260">
+          <div class="door-leaf">
+            <div class="door-pad">
+              <i class="ph ph-lock-key" id="lock-icon"></i>
+              <span class="door-dots" id="lock-dots"><span></span><span></span><span></span><span></span></span>
+            </div>
+          </div>
         </div>
+        <p class="lock-status" id="lock-screen" role="status">Enter your code</p>
         <button class="btn btn-ghost btn-small" type="button" id="lock-replay">Replay</button>
       </div>
     </section>
@@ -166,12 +202,14 @@
     <section class="section wrap qa" id="questions">
       <h2>Questions guests ask first</h2>
       <div class="faq">
-        <details><summary>How does self check-in work?</summary><p>Once your booking is confirmed, you get a door code and directions on your phone. Arrive any time after 2 PM and use the digital lock on the door. No key handover and no desk.</p></details>
-        <details><summary>What are the check-in and check-out times?</summary><p>Check-in is from 2 PM and check-out is by 11 AM. Ask the host if you need something different.</p></details>
-        <details><summary>How many guests can stay?</summary><p>Up to 4 guests.</p></details>
-        <details><summary>Is it suitable for working remotely?</summary><p>Yes. There is a proper desk with an ergonomic chair, Wi-Fi is included, and you have the whole suite to yourself for calls.</p></details>
-        <details><summary>Can I cook here?</summary><p>There is a kitchenette with a sink and cabinets, plus a kettle, tea tray and mini fridge. Ask the host what cooking equipment is provided.</p></details>
-        <details><summary>Is someone around if I need help?</summary><p>The host is a call or message away on xxxxx xxxxx.</p></details>
+        <details><summary>How does self check-in work?</summary><p>Once your booking is confirmed, you get a door code and directions on your phone. Arrive any time after 12 PM and use the digital lock on the door. No key handover and no desk.</p></details>
+        <details><summary>What are the check-in and check-out times?</summary><p>Check-in is from 12 PM and check-out is by 11 AM. Ask the host if you need something different.</p></details>
+        <details><summary>How many guests can stay?</summary><p>Up to 2 overnight guests, in one bed.</p></details>
+        <details><summary>Is it suitable for working remotely?</summary><p>Yes. There is a proper desk with an ergonomic chair, Wi-Fi is included, and the room is private for calls.</p></details>
+        <details><summary>Can I cook here?</summary><p>There is no full kitchen. The room has a pantry corner with a sink and cabinets, plus a kettle, tea tray and mini fridge.</p></details>
+        <details><summary>What is not included?</summary><p>There is no heating, washing machine or tumble dryer. The room has air conditioning and ceiling fans.</p></details>
+        <details><summary>Can I cancel?</summary><p>On Airbnb, the dates we checked had free cancellation until about a day before check-in. The exact date for your stay is shown when you book.</p></details>
+        <details><summary>Is someone around if I need help?</summary><p>Your host, Jassi, is an Airbnb Superhost who replies within an hour, and is a call away on xxxxx xxxxx.</p></details>
       </div>
     </section>
 
@@ -179,8 +217,9 @@
       <div class="wrap enquiry-grid">
         <div>
           <h2>Prefer to talk it through?</h2>
-          <p class="sub">Share your details and the host will call you back about your dates, or reach out directly.</p>
-          <!-- shortcut: phone and WhatsApp are off until the owner confirms the number, then add tel: and wa.me hrefs -->
+          <p class="sub">Share your details and the host will call you back about your dates.</p>
+          <!-- shortcut: phone and WhatsApp are off until the owner confirms the number, then add tel: and wa.me hrefs and make WhatsApp the main contact -->
+          <a class="btn btn-ghost airbnb-cta" href="https://www.airbnb.co.in/rooms/1792674513928778015" target="_blank" rel="noopener"><i class="ph ph-house-line" aria-hidden="true"></i>Book on Airbnb</a>
           <p class="phone"><i class="ph ph-phone" aria-hidden="true"></i>xxxxx xxxxx</p>
           <div class="social" aria-label="Snow Clad on social media" role="group">
             <a href="#" data-pending aria-label="Snow Clad on WhatsApp"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i></a>
@@ -203,22 +242,10 @@
                 <p class="err" id="l-phone-err"></p>
               </div>
             </div>
-            <div class="row">
-              <div class="field">
-                <label for="l-in">Check-in</label>
-                <input id="l-in" name="checkin" type="date" aria-describedby="l-in-err">
-                <p class="err" id="l-in-err"></p>
-              </div>
-              <div class="field">
-                <label for="l-out">Check-out</label>
-                <input id="l-out" name="checkout" type="date" aria-describedby="l-out-err">
-                <p class="err" id="l-out-err"></p>
-              </div>
-            </div>
-            <div class="field">
-              <label for="l-note">Anything we should know? (optional)</label>
-              <textarea id="l-note" name="note" rows="3"></textarea>
-            </div>
+            <button class="date-trigger" type="button" data-dates aria-label="Choose your dates">
+              <span><small>Check-in</small><b data-in>Add date</b></span>
+              <span><small>Check-out</small><b data-out>Add date</b></span>
+            </button>
             <button class="btn btn-solid" type="submit">Request a call back</button>
             <p class="demo-note">Demo form: nothing you enter here is sent or saved.</p>
           </form>
@@ -236,7 +263,7 @@
   <footer class="footer">
     <div class="wrap footer-inner">
       <p class="brand"><i class="ph ph-snowflake" aria-hidden="true"></i>Snow Clad</p>
-      <p>Snow Clad Group, SBP City of Dreams, Zirakpur, Punjab 140603</p>
+      <p>Snow Clad Elite Urban, SBP City of Dreams, Zirakpur, Punjab 140603. <a href="https://www.airbnb.co.in/rooms/1792674513928778015" target="_blank" rel="noopener">Book on Airbnb</a></p>
       <div class="social" aria-label="Snow Clad on social media" role="group">
         <a href="#" data-pending aria-label="Snow Clad on WhatsApp"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i></a>
         <a href="#" data-pending aria-label="Snow Clad on Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
@@ -245,17 +272,44 @@
     </div>
   </footer>
 
-  <dialog class="gallery" id="gallery" aria-label="All photos of the suite">
+  <dialog class="picker" id="picker" aria-labelledby="picker-title">
+    <header class="picker-head">
+      <h2 id="picker-title">Choose your dates</h2>
+      <button class="icon-btn" type="button" id="picker-close" aria-label="Close calendar"><i class="ph ph-x" aria-hidden="true"></i></button>
+    </header>
+    <div id="picker-cal"></div>
+    <footer class="picker-foot">
+      <p id="picker-summary" aria-live="polite"></p>
+      <button class="btn btn-ghost btn-small" type="button" id="picker-clear">Clear</button>
+      <button class="btn btn-solid btn-small" type="button" id="picker-done" disabled>Done</button>
+    </footer>
+  </dialog>
+
+  <dialog class="gallery" id="gallery" aria-label="All photos of the room">
     <header class="gallery-head">
       <h2>All photos</h2>
       <button class="icon-btn" type="button" id="gallery-close" aria-label="Close photos"><i class="ph ph-x" aria-hidden="true"></i></button>
     </header>
+    <div class="gallery-filters" id="gallery-filters" role="group" aria-label="Filter photos by room"></div>
     <div class="gallery-body" id="gallery-body"></div>
+  </dialog>
+
+  <dialog class="viewer" id="viewer" aria-label="Photo viewer">
+    <div class="viewer-track" id="viewer-track" tabindex="0"></div>
+    <button class="icon-btn viewer-btn viewer-close" type="button" id="viewer-close" aria-label="Close photo"><i class="ph ph-x" aria-hidden="true"></i></button>
+    <button class="icon-btn viewer-btn viewer-prev" type="button" id="viewer-prev" aria-label="Previous photo"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+    <button class="icon-btn viewer-btn viewer-next" type="button" id="viewer-next" aria-label="Next photo"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+    <p class="viewer-cap" id="viewer-cap" aria-live="polite"></p>
   </dialog>
 
   <button class="chat-fab" id="chat-fab" type="button" data-open-chat aria-label="Open the Snow Clad assistant" aria-expanded="false" aria-controls="chat">
     <i class="ph ph-chat-circle-dots" aria-hidden="true"></i><span>Ask Snow</span>
   </button>
+
+  <div class="mobile-bar" id="mobile-bar">
+    <button class="btn btn-solid" type="button" id="bar-dates">Check dates</button>
+    <button class="icon-btn bar-chat" type="button" data-open-chat aria-label="Open the Snow Clad assistant"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i></button>
+  </div>
 
   <section class="chat" id="chat" role="dialog" aria-label="Snow Clad assistant" hidden>
     <header class="chat-head">

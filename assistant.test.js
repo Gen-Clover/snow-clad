@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { parseDates, parseGuests, isPhone, isOpen, isBooked, quote, newState, reply, STAY } from './assistant.js';
+import { parseDates, parseGuests, isPhone, isOpen, isBooked, newState, reply, greeting } from './assistant.js';
+import { dayState, pick } from './calendar.js';
 
 // Wed 4 Nov 2026
 const today = new Date(2026, 10, 4);
@@ -50,11 +51,6 @@ test('parses guests', () => {
 test('validates Indian mobile numbers', () => {
   for (const ok of ['9876543210', '+91 98765 43210', '98765-43210']) assert.ok(isPhone(ok), ok);
   for (const bad of ['12345', '1234567890', 'abc', '98765432101']) assert.ok(!isPhone(bad), bad);
-});
-
-test('weekend nights use the weekend rate', () => {
-  // Thu 5 Nov to Sun 8 Nov: Thu, Fri, Sat
-  assert.equal(quote(new Date(2026, 10, 5), new Date(2026, 10, 8)), STAY.nightly + 2 * STAY.weekend);
 });
 
 test('a stay is closed when any night is booked, but check-out day can be booked', () => {
@@ -108,6 +104,66 @@ test('every reply says something', () => {
       assert.ok(reply(msg, s, today).say.join('').length > 0, `${step}:${msg}`);
     }
   }
+});
+
+const daysBefore = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() - n);
+// First day of a booked run, so the night before it is open.
+const firstBooked = Array.from({ length: 40 }, (_, i) => new Date(2026, 10, 5 + i)).find(d => isBooked(d) && !isBooked(daysBefore(d, 1)));
+const empty = { start: null, end: null };
+
+test('calendar blocks past and booked days', () => {
+  assert.equal(dayState(new Date(2026, 10, 3), empty, today).disabled, true);
+  assert.equal(dayState(firstBooked, empty, today).disabled, true);
+  assert.equal(dayState(daysBefore(firstBooked, 1), empty, today).disabled, false);
+});
+
+test('a booked day can be the check-out day but a stay cannot cross it', () => {
+  const start = daysBefore(firstBooked, 1);
+  const state = dayState(firstBooked, { start, end: null }, today);
+  assert.equal(state.checkoutOnly, true);
+  assert.equal(state.disabled, false);
+  assert.deepEqual(pick({ start, end: null }, firstBooked), { start, end: firstBooked });
+  const past = new Date(firstBooked.getFullYear(), firstBooked.getMonth(), firstBooked.getDate() + 3);
+  assert.equal(isBooked(past), false);
+  assert.deepEqual(pick({ start, end: null }, past), { start: past, end: null });
+});
+
+test('picking again after a full range starts a new range', () => {
+  const start = new Date(2026, 10, 5), end = new Date(2026, 10, 6), next = new Date(2026, 10, 7);
+  assert.deepEqual(pick({ start, end }, next), { start: next, end: null });
+  assert.deepEqual(pick({ start, end: null }, start), { start, end: null });
+});
+
+test('calendar dates sent to the assistant parse, including September', () => {
+  assert.deepEqual(range('15 Nov 2026 to 18 Nov 2026, 2 guests'), ['2026-11-15', '2026-11-18']);
+  assert.deepEqual(range('5 Sept 2027 to 8 Sept 2027'), ['2027-9-5', '2027-9-8']);
+});
+
+test('date prompts carry a calendar and no reply quotes a price', () => {
+  assert.equal(greeting().calendar, true);
+  const free = Array.from({ length: 40 }, (_, i) => new Date(2026, 10, 5 + i))
+    .find(d => isOpen(d, new Date(d.getFullYear(), d.getMonth(), d.getDate() + 3)));
+  const out = new Date(free.getFullYear(), free.getMonth(), free.getDate() + 3);
+  const fmt = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  const conversation = [`${fmt(free)} to ${fmt(out)}, 2 guests`, 'what is the price?', 'Yes, hold these dates', 'Harpreet Kaur', '98765 43210'];
+  let state = newState();
+  for (const message of conversation) {
+    const r = reply(message, state, today);
+    assert.doesNotMatch(r.say.join(' '), /₹|\bRs\b/);
+    state = r.state;
+  }
+  assert.equal(state.step, 'done');
+  assert.doesNotMatch(readFileSync('index.html', 'utf8'), /₹/);
+});
+
+test('review data has the shape the page reads', () => {
+  const data = JSON.parse(readFileSync('assets/reviews.json', 'utf8'));
+  assert.equal(data.rating, 5);
+  assert.ok(data.count === null || Number.isInteger(data.count));
+  assert.match(data.url, /^https:\/\/www\.google\.com\/maps\//);
+  assert.equal(data.airbnb.count, data.reviews.length);
+  for (const s of data.airbnb.scores) assert.ok(s.label && s.score <= 5, s.label);
+  for (const r of data.reviews) assert.ok(r.author && r.text && r.source, 'a review needs an author, text and source');
 });
 
 test('photo manifest and page only reference photos that exist', () => {
