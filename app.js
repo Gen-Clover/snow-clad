@@ -13,8 +13,10 @@ function make(tag, className, text) {
   return el;
 }
 
-/* Nav turns solid once the hero has scrolled away */
-new IntersectionObserver(([e]) => $('nav').classList.toggle('over', e.isIntersecting), { rootMargin: '-80px 0px -50% 0px' }).observe($('top'));
+/* Nav is clear only at the very top, so its links never sit over the scrolling headline */
+const atTop = () => $('nav').classList.toggle('over', scrollY < 8);
+addEventListener('scroll', atTop, { passive: true });
+atTop();
 $('menu').addEventListener('click', e => { if (e.target.closest('a') && $('menu').matches(':popover-open')) $('menu').hidePopover(); });
 
 /* Chosen dates are shared by the booking bar, the lead form and the chat */
@@ -69,8 +71,11 @@ $('picker-done').addEventListener('click', () => {
 document.querySelectorAll('[data-dates]').forEach(b => b.addEventListener('click', () => openPicker(b)));
 
 /* Assistant */
-const chat = $('chat'), log = $('chat-log'), chips = $('chat-chips'), input = $('chat-input'), fab = $('chat-fab'), bar = $('mobile-bar');
+const chat = $('chat'), log = $('chat-log'), chips = $('chat-chips'), input = $('chat-input'), fab = $('chat-fab');
 let state = null, busy = false, opener = fab;
+
+// Focusing the input on touch screens opens the keyboard over the conversation.
+const focusChat = () => (matchMedia('(hover: hover)').matches ? input : $('chat-close')).focus();
 
 function bubble(text, who) {
   const el = make('div', `msg ${who}`, text);
@@ -120,16 +125,15 @@ async function send(text) {
   bubble(text.trim(), 'me');
   input.value = '';
   await speak(reply(text, state));
-  input.focus();
+  focusChat();
 }
 
 async function openChat(trigger, firstMessage) {
   opener = trigger;
   chat.hidden = false;
   fab.hidden = true;
-  bar.hidden = true;
   fab.setAttribute('aria-expanded', 'true');
-  input.focus();
+  focusChat();
   if (!state) await speak({ ...greeting(), calendar: !firstMessage });
   if (firstMessage) await send(firstMessage);
 }
@@ -137,8 +141,8 @@ async function openChat(trigger, firstMessage) {
 function closeChat() {
   chat.hidden = true;
   fab.hidden = false;
-  bar.hidden = false;
   fab.setAttribute('aria-expanded', 'false');
+  tuckFab();
   opener?.focus();
 }
 
@@ -147,14 +151,23 @@ $('chat-close').addEventListener('click', closeChat);
 chat.addEventListener('keydown', e => { if (e.key === 'Escape') closeChat(); });
 $('chat-form').addEventListener('submit', e => { e.preventDefault(); send(input.value); });
 
-/* Booking bar and mobile bar: ask for dates if needed, then hand over to the assistant */
+/* Booking bar: ask for dates if needed, then hand over to the assistant */
 function checkDates(trigger) {
   if (stay.end) openChat(trigger, stayMessage());
   else openPicker(trigger, t => openChat(t, stayMessage()));
 }
 
 $('booking').addEventListener('submit', e => { e.preventDefault(); checkDates(e.submitter); });
-$('bar-dates').addEventListener('click', e => checkDates(e.currentTarget));
+
+// On short screens the launcher would sit on the booking button, so the bot moves to the nav until the form scrolls past.
+function tuckFab() {
+  const b = $('booking').getBoundingClientRect(), f = fab.getBoundingClientRect();
+  fab.classList.toggle('tucked', f.left < b.right && b.left < f.right && f.top < b.bottom && b.top < f.bottom);
+  fab.classList.toggle('compact', b.bottom < 0);
+}
+addEventListener('scroll', tuckFab, { passive: true });
+addEventListener('resize', tuckFab);
+tuckFab();
 
 /* Door unlock animation */
 const lock = $('lock'), screen = $('lock-screen'), lockIcon = $('lock-icon'), dots = [...$('lock-dots').children];

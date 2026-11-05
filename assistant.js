@@ -155,7 +155,7 @@ export const newState = () => ({ step: 'dates', checkIn: null, checkOut: null, g
 
 export const greeting = () => ({
   state: newState(),
-  say: ["Hi, I'm Snow, the Snow Clad stay assistant. Which dates are you looking at?"],
+  say: ["Hi, I'm Snow, the Snow Clad AI stay assistant. Which dates are you looking at?"],
   chips: ['This weekend', 'Next weekend', 'Tomorrow for 2 nights'],
   calendar: true,
 });
@@ -243,7 +243,7 @@ export function reply(text, state, today = new Date()) {
     }
     if (/^(no|nope)\b|other dates|different dates/.test(t)) return advance({ ...newState(), guests: s.guests }, ['No problem.']);
   }
-  if (/other dates|different dates/.test(t)) return advance({ ...newState(), guests: s.guests }, []);
+  if (/other dates|different dates|pick dates/.test(t)) return advance({ ...newState(), guests: s.guests }, []);
 
   const dates = parseDates(t, today);
   const guests = parseGuests(t, s.step === 'guests');
@@ -266,6 +266,11 @@ export function reply(text, state, today = new Date()) {
   }
 
   const changed = s.checkIn !== state.checkIn || s.checkOut !== state.checkOut || s.guests !== state.guests;
+  // An answered question stands on its own: the next steps stay as chips instead of being asked again.
+  if (answer && !changed) {
+    const next = s.step === 'done' ? { state: s, chips: PROMPT.done[1] } : advance(s, []);
+    return { say: say.filter(Boolean), state: next.state, chips: next.calendar ? ['Pick dates', ...next.chips] : next.chips };
+  }
   if (!changed && !say.length) say.push(answer ? '' : "I didn't quite catch that.");
   if (!changed && PROMPT[s.step]) {
     say.push(PROMPT[s.step][0]);

@@ -97,6 +97,29 @@ test('questions mid-flow are answered without losing progress', () => {
   assert.match(r.say[1], /your name/);
 });
 
+test('an answered question does not ask for dates again but keeps the way forward', () => {
+  const r = reply('do you have parking', greeting().state, today);
+  assert.deepEqual(r.say.length, 1);
+  assert.match(r.say[0], /parking/i);
+  assert.equal(r.chips[0], 'Pick dates');
+  assert.equal(r.calendar, undefined);
+  assert.equal(reply('Pick dates', r.state, today).calendar, true);
+
+  const s = { ...newState(), step: 'offer', checkIn: new Date(2026, 10, 6), checkOut: new Date(2026, 10, 8), guests: 2 };
+  const offer = reply('is there wifi', s, today);
+  assert.equal(offer.say.length, 1);
+  assert.equal(offer.state.step, 'offer');
+  assert.ok(offer.chips.includes('Yes, hold these dates'));
+
+  const done = reply('is there wifi', { ...s, step: 'done' }, today);
+  assert.equal(done.state.step, 'done');
+  assert.deepEqual(done.chips, ['Start over']);
+
+  // Still guides the guest when nothing was understood, and dates in a question still move on.
+  assert.equal(reply('blah blah', newState(), today).calendar, true);
+  assert.equal(reply('parking for 6 to 8 Nov', newState(), today).state.checkIn.getDate(), 6);
+});
+
 test('every reply says something', () => {
   for (const step of ['dates', 'guests', 'offer', 'name', 'phone', 'done']) {
     for (const msg of ['asdf', 'what is the price?', '']) {

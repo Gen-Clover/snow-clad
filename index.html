@@ -45,6 +45,7 @@
       </nav>
       <div class="nav-actions">
         <button class="btn btn-solid btn-small nav-cta" type="button" data-open-chat>Check availability</button>
+        <button class="icon-btn nav-bot" type="button" data-open-chat aria-label="Open Snow, the AI stay assistant"><i class="ph ph-robot" aria-hidden="true"></i></button>
         <button class="icon-btn menu-btn" type="button" popovertarget="menu" aria-label="Open menu"><i class="ph ph-list" aria-hidden="true"></i></button>
       </div>
     </div>
@@ -55,8 +56,10 @@
       <img class="hero-img" src="assets/photos/bedroom-four-poster-rug-lounge-01.avif" alt="Four-poster bed with a brown runner and bench on a patterned rug, with the lounge behind it" width="1680" height="1260" fetchpriority="high">
       <div class="wrap hero-inner">
         <button class="hero-photos" type="button" data-gallery><i class="ph ph-images" aria-hidden="true"></i>37 photos</button>
-        <h1>Skip the front desk. Let yourself in.</h1>
-        <p class="lede">Snow Clad Elite Urban is a private room with an attached bathroom and free parking in Zirakpur, near Chandigarh. Pick your dates and get an instant answer.</p>
+        <div class="hero-copy">
+          <h1>Skip the front desk. Let yourself in.</h1>
+          <p class="lede">Snow Clad Elite Urban is a private room with an attached bathroom and free parking in Zirakpur, near Chandigarh. Pick your dates and get an instant answer.</p>
+        </div>
 
         <form class="booking" id="booking" novalidate aria-label="Check availability">
           <button class="date-trigger" type="button" data-dates aria-label="Choose your dates">
@@ -304,20 +307,16 @@
     <p class="viewer-cap" id="viewer-cap" aria-live="polite"></p>
   </dialog>
 
-  <button class="chat-fab" id="chat-fab" type="button" data-open-chat aria-label="Open the Snow Clad assistant" aria-expanded="false" aria-controls="chat">
-    <i class="ph ph-chat-circle-dots" aria-hidden="true"></i><span>Ask Snow</span>
+  <button class="chat-fab" id="chat-fab" type="button" data-open-chat aria-label="Open Snow, the AI stay assistant" aria-expanded="false" aria-controls="chat">
+    <i class="ph ph-robot" aria-hidden="true"></i><span>Ask Snow AI</span>
   </button>
 
-  <div class="mobile-bar" id="mobile-bar">
-    <button class="btn btn-solid" type="button" id="bar-dates">Check dates</button>
-    <button class="icon-btn bar-chat" type="button" data-open-chat aria-label="Open the Snow Clad assistant"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i></button>
-  </div>
-
-  <section class="chat" id="chat" role="dialog" aria-label="Snow Clad assistant" hidden>
+  <section class="chat" id="chat" role="dialog" aria-label="Snow, the AI stay assistant" hidden>
     <header class="chat-head">
-      <div>
+      <span class="chat-avatar" aria-hidden="true"><i class="ph ph-robot"></i></span>
+      <div class="chat-title">
         <strong>Snow</strong>
-        <span>Stay assistant</span>
+        <span>AI stay assistant</span>
       </div>
       <button class="icon-btn" type="button" id="chat-close" aria-label="Close assistant"><i class="ph ph-x" aria-hidden="true"></i></button>
     </header>
@@ -328,7 +327,7 @@
       <input id="chat-input" placeholder="Type your dates or a question">
       <button class="icon-btn icon-solid" type="submit" aria-label="Send"><i class="ph ph-paper-plane-right" aria-hidden="true"></i></button>
     </form>
-    <p class="chat-note">Demo assistant. Nothing is sent or saved.</p>
+    <p class="chat-note">Demo of the assistant: replies are scripted and nothing is sent or saved.</p>
   </section>
 
   <script type="module" src="app.js"></script>
